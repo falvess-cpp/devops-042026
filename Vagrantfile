@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
 
     controle.vm.provider "virtualbox" do |vb|
       vb.name = "controle"
-      vb.memory = "2048"
+      vb.memory = "6000"
       vb.cpus = 2
     end
 	
@@ -17,6 +17,10 @@ Vagrant.configure("2") do |config|
       al.playbook = "installdocker.yml" 
       al.install_mode = "apt"
     end
+    controle.vm.provision "ansible_local" do |al|
+      al.playbook = "installjenkins.yml"
+      al.install_mode = "apt"
+    end	
   end	
 
 config.vm.define "web" do |web|
@@ -26,7 +30,7 @@ config.vm.define "web" do |web|
 
     web.vm.provider "virtualbox" do |vb|
       vb.name = "web"
-      vb.memory = "512"
+      vb.memory = "6000"
       vb.cpus = 2
     end
   end
@@ -38,7 +42,7 @@ config.vm.define "db" do |db|
 
     db.vm.provider "virtualbox" do |vb|
       vb.name = "db"
-      vb.memory = "512"
+      vb.memory = "6000"
       vb.cpus = 2
     end
   end
